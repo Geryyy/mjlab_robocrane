@@ -13,6 +13,8 @@ from mjlab.managers.scene_entity_config import SceneEntityCfg
 from mjlab.sensor import ContactSensor
 from mjlab.utils.lab_api.math import euler_xyz_from_quat, sample_uniform, wrap_to_pi
 
+from .ctc_action import JointAccelerationCtcAction
+
 if TYPE_CHECKING:
   from mjlab.envs import ManagerBasedRlEnv
 
@@ -169,3 +171,22 @@ def illegal_contact(env: "ManagerBasedRlEnv", sensor_name: str) -> torch.Tensor:
   assert sensor.data.found is not None
   return sensor.data.found.squeeze(-1) > 0
 
+
+def _ctc_action_term(
+  env: "ManagerBasedRlEnv", action_term_name: str = "joint_acc_ctc"
+) -> JointAccelerationCtcAction:
+  return cast(JointAccelerationCtcAction, env.action_manager.get_term(action_term_name))
+
+
+def tcp_force_norm(
+  env: "ManagerBasedRlEnv", action_term_name: str = "joint_acc_ctc"
+) -> torch.Tensor:
+  action_term = _ctc_action_term(env, action_term_name)
+  return action_term.force_norm
+
+
+def tcp_tau_residual_norm(
+  env: "ManagerBasedRlEnv", action_term_name: str = "joint_acc_ctc"
+) -> torch.Tensor:
+  action_term = _ctc_action_term(env, action_term_name)
+  return action_term.tau_res_norm

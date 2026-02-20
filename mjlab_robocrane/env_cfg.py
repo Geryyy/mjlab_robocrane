@@ -3,6 +3,7 @@
 from mjlab.envs import ManagerBasedRlEnvCfg
 from mjlab.envs import mdp as envs_mdp
 from mjlab.managers import (
+  MetricsTermCfg,
   ObservationGroupCfg,
   ObservationTermCfg,
   RewardTermCfg,
@@ -104,6 +105,7 @@ def robocrane_jointspace_env_cfg(
       },
     ),
     "action_rate": RewardTermCfg(func=envs_mdp.action_rate_l2, weight=-0.03),
+    "action_acc": RewardTermCfg(func=envs_mdp.action_acc_l2, weight=-0.02),
     "joint_torque": RewardTermCfg(func=envs_mdp.joint_torques_l2, weight=-1.0e-4),
     "joint_pos_limits": RewardTermCfg(
       func=envs_mdp.joint_pos_limits,
@@ -124,6 +126,11 @@ def robocrane_jointspace_env_cfg(
   terminations = {
     "time_out": TerminationTermCfg(func=envs_mdp.time_out, time_out=True),
     "nan_detection": TerminationTermCfg(func=envs_mdp.nan_detection),
+  }
+
+  metrics = {
+    "tcp_force_norm": MetricsTermCfg(func=mdp.tcp_force_norm),
+    "tcp_tau_res_norm": MetricsTermCfg(func=mdp.tcp_tau_residual_norm),
   }
 
   cfg = ManagerBasedRlEnvCfg(
@@ -175,12 +182,15 @@ def robocrane_jointspace_env_cfg(
         kd=(12.0, 12.0, 10.0, 9.0, 7.0, 6.0, 5.0),
         # Diagonal inertia approximation (tunable).
         inertia_diag=(8.0, 8.0, 5.0, 3.0, 2.0, 1.2, 0.8),
+        # Low-pass filtering on policy actions for smoother acceleration commands.
+        action_lpf_alpha=0.85,
       )
     },
     commands=commands,
     events=events,
     rewards=rewards,
     terminations=terminations,
+    metrics=metrics,
     viewer=ViewerConfig(
       origin_type=ViewerConfig.OriginType.ASSET_BODY,
       entity_name="robot",
