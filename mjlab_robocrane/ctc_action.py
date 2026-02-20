@@ -152,6 +152,22 @@ class JointAccelerationCtcAction(ActionTerm):
   def tau_res_norm(self) -> torch.Tensor:
     return self._tau_res_norm
 
+  @property
+  def q_d(self) -> torch.Tensor:
+    return self._q_d
+
+  @property
+  def qdot_d(self) -> torch.Tensor:
+    return self._qdot_d
+
+  @property
+  def qddot_d(self) -> torch.Tensor:
+    return self._qddot_cmd
+
+  @property
+  def tau_cmd(self) -> torch.Tensor:
+    return self._tau_cmd
+
   def process_actions(self, actions: torch.Tensor) -> None:
     self._raw_action[:] = torch.clamp(actions, -1.0, 1.0)
     a = self._action_lpf_alpha

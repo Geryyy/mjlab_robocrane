@@ -42,6 +42,7 @@ class GoalPoseCommand(CommandTerm):
 
     self.metrics["goal_distance"] = torch.zeros(self.num_envs, device=self.device)
     self.metrics["goal_yaw_error"] = torch.zeros(self.num_envs, device=self.device)
+    self.metrics["phase_contact"] = torch.zeros(self.num_envs, device=self.device)
 
   @property
   def command(self) -> torch.Tensor:
@@ -66,13 +67,22 @@ class GoalPoseCommand(CommandTerm):
     yaw_err = torch.abs(wrap_to_pi((self.ee_yaw - self.target_yaw).squeeze(-1)))
     self.metrics["goal_distance"] = pos_err
     self.metrics["goal_yaw_error"] = yaw_err
+    self.metrics["phase_contact"] = torch.full(
+      (self.num_envs,), float(self._is_contact_phase()), device=self.device
+    )
 
   def _resample_command(self, env_ids: torch.Tensor) -> None:
     n = len(env_ids)
     if n == 0:
       return
 
-    pos_ranges = self.cfg.position_ranges
+    if self._is_contact_phase():
+      pos_ranges = self.cfg.contact_position_ranges
+      yaw_low, yaw_high = self.cfg.contact_yaw_range
+    else:
+      pos_ranges = self.cfg.free_position_ranges
+      yaw_low, yaw_high = self.cfg.free_yaw_range
+
     lower = torch.tensor(
       [pos_ranges.x[0], pos_ranges.y[0], pos_ranges.z[0]], device=self.device
     )
@@ -83,7 +93,7 @@ class GoalPoseCommand(CommandTerm):
     pos = pos + self._env.scene.env_origins[env_ids]
 
     yaw = sample_uniform(
-      self.cfg.yaw_range[0], self.cfg.yaw_range[1], (n, 1), device=self.device
+      yaw_low, yaw_high, (n, 1), device=self.device
     )
 
     self.target_pos_w[env_ids] = pos
@@ -92,12 +102,17 @@ class GoalPoseCommand(CommandTerm):
   def _update_command(self) -> None:
     pass
 
+  def _is_contact_phase(self) -> bool:
+    return self._env.common_step_counter >= self.cfg.curriculum_switch_steps
+
 
 @dataclass(kw_only=True)
 class GoalPoseCommandCfg(CommandTermCfg):
   entity_name: str = "robot"
   ee_site_name: str = "gripping_point"
-  yaw_range: tuple[float, float] = (-3.14159, 3.14159)
+  free_yaw_range: tuple[float, float] = (-3.14159, 3.14159)
+  contact_yaw_range: tuple[float, float] = (-0.6, 0.6)
+  curriculum_switch_steps: int = 200_000
 
   @dataclass
   class PositionRanges:
@@ -105,10 +120,25 @@ class GoalPoseCommandCfg(CommandTermCfg):
     y: tuple[float, float] = (-0.25, 0.25)
     z: tuple[float, float] = (0.15, 0.55)
 
-  position_ranges: PositionRanges = field(default_factory=PositionRanges)
+  free_position_ranges: PositionRanges = field(default_factory=PositionRanges)
+
+  @dataclass
+  class ContactPositionRanges:
+    x: tuple[float, float] = (0.42, 0.48)
+    y: tuple[float, float] = (-0.05, 0.05)
+    z: tuple[float, float] = (0.235, 0.255)
+
+  contact_position_ranges: ContactPositionRanges = field(default_factory=ContactPositionRanges)
 
   def build(self, env: "ManagerBasedRlEnv") -> GoalPoseCommand:
     return GoalPoseCommand(self, env)
+
+
+def in_contact_phase(
+  env: "ManagerBasedRlEnv", command_name: str = "goal_pose"
+) -> torch.Tensor:
+  cmd = cast(GoalPoseCommand, env.command_manager.get_term(command_name))
+  return torch.full((env.num_envs,), float(cmd._is_contact_phase()), device=env.device)
 
 
 def goal_position_error(env: "ManagerBasedRlEnv", command_name: str) -> torch.Tensor:
@@ -159,11 +189,51 @@ def success_bonus(
   return ((pos_error < pos_threshold) & (yaw_error < yaw_threshold)).float()
 
 
+def success_bonus_gated(
+  env: "ManagerBasedRlEnv",
+  command_name: str,
+  pos_threshold: float,
+  yaw_threshold: float,
+) -> torch.Tensor:
+  phase = in_contact_phase(env, command_name)
+  return (1.0 - phase) * success_bonus(env, command_name, pos_threshold, yaw_threshold)
+
+
+def success_bonus_contact(
+  env: "ManagerBasedRlEnv",
+  command_name: str,
+  pos_threshold: float,
+  yaw_threshold: float,
+) -> torch.Tensor:
+  phase = in_contact_phase(env, command_name)
+  return phase * success_bonus(env, command_name, pos_threshold, yaw_threshold)
+
+
 def passive_joint_velocity_l2(
   env: "ManagerBasedRlEnv", asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
 ) -> torch.Tensor:
   robot: Entity = env.scene[asset_cfg.name]
   return torch.sum(torch.square(robot.data.joint_vel[:, asset_cfg.joint_ids]), dim=-1)
+
+
+def passive_joint_pos_shaping_exp(
+  env: "ManagerBasedRlEnv",
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+  std: float = 0.25,
+) -> torch.Tensor:
+  robot: Entity = env.scene[asset_cfg.name]
+  q = robot.data.joint_pos[:, asset_cfg.joint_ids]
+  return torch.exp(-torch.sum(torch.square(q), dim=-1) / (std * std))
+
+
+def redundancy_joint_shaping_exp(
+  env: "ManagerBasedRlEnv",
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+  std: float = 0.45,
+) -> torch.Tensor:
+  robot: Entity = env.scene[asset_cfg.name]
+  q = robot.data.joint_pos[:, asset_cfg.joint_ids]
+  return torch.exp(-torch.sum(torch.square(q), dim=-1) / (std * std))
 
 
 def illegal_contact(env: "ManagerBasedRlEnv", sensor_name: str) -> torch.Tensor:
@@ -190,3 +260,17 @@ def tcp_tau_residual_norm(
 ) -> torch.Tensor:
   action_term = _ctc_action_term(env, action_term_name)
   return action_term.tau_res_norm
+
+
+def tcp_force_tracking_exp(
+  env: "ManagerBasedRlEnv",
+  desired_force: float,
+  std: float,
+  command_name: str = "goal_pose",
+  action_term_name: str = "joint_acc_ctc",
+) -> torch.Tensor:
+  action_term = _ctc_action_term(env, action_term_name)
+  force_norm = action_term.force_norm
+  force_reward = torch.exp(-torch.square(force_norm - desired_force) / (std * std))
+  phase = in_contact_phase(env, command_name)
+  return phase * force_reward

@@ -66,6 +66,7 @@ def robocrane_jointspace_env_cfg(
       resampling_time_range=(8.0, 12.0),
       entity_name="robot",
       ee_site_name="gripping_point",
+      curriculum_switch_steps=200_000,
     )
   }
 
@@ -95,8 +96,8 @@ def robocrane_jointspace_env_cfg(
       weight=2.0,
       params={"command_name": "goal_pose", "std": 0.30},
     ),
-    "success_bonus": RewardTermCfg(
-      func=mdp.success_bonus,
+    "success_bonus_free": RewardTermCfg(
+      func=mdp.success_bonus_gated,
       weight=8.0,
       params={
         "command_name": "goal_pose",
@@ -104,8 +105,32 @@ def robocrane_jointspace_env_cfg(
         "yaw_threshold": 0.12,
       },
     ),
+    "success_bonus_contact": RewardTermCfg(
+      func=mdp.success_bonus_contact,
+      weight=10.0,
+      params={
+        "command_name": "goal_pose",
+        "pos_threshold": 0.03,
+        "yaw_threshold": 0.16,
+      },
+    ),
+    "tcp_force_tracking": RewardTermCfg(
+      func=mdp.tcp_force_tracking_exp,
+      weight=5.0,
+      params={"desired_force": 22.0, "std": 6.0, "command_name": "goal_pose"},
+    ),
     "action_rate": RewardTermCfg(func=envs_mdp.action_rate_l2, weight=-0.03),
     "action_acc": RewardTermCfg(func=envs_mdp.action_acc_l2, weight=-0.02),
+    "redundancy_joint_shape": RewardTermCfg(
+      func=mdp.redundancy_joint_shaping_exp,
+      weight=0.3,
+      params={"asset_cfg": SceneEntityCfg("robot", joint_names=("joint_3", "joint_5")), "std": 0.45},
+    ),
+    "passive_joint_pos_shape": RewardTermCfg(
+      func=mdp.passive_joint_pos_shaping_exp,
+      weight=0.35,
+      params={"asset_cfg": SceneEntityCfg("robot", joint_names=("joint_cj1", "joint_cj2")), "std": 0.28},
+    ),
     "joint_torque": RewardTermCfg(func=envs_mdp.joint_torques_l2, weight=-1.0e-4),
     "joint_pos_limits": RewardTermCfg(
       func=envs_mdp.joint_pos_limits,
@@ -131,6 +156,7 @@ def robocrane_jointspace_env_cfg(
   metrics = {
     "tcp_force_norm": MetricsTermCfg(func=mdp.tcp_force_norm),
     "tcp_tau_res_norm": MetricsTermCfg(func=mdp.tcp_tau_residual_norm),
+    "contact_phase": MetricsTermCfg(func=mdp.in_contact_phase),
   }
 
   cfg = ManagerBasedRlEnvCfg(

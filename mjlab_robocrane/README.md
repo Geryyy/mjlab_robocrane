@@ -47,6 +47,13 @@ python3 mjlab_robocrane/play.py \
 
 # For recurrent checkpoints, force LSTM if needed
 python3 mjlab_robocrane/play.py --checkpoint-file <ckpt> --policy lstm
+
+# Stream telemetry over UDP (protobuf) like legacy play script
+python3 mjlab_robocrane/play.py \
+  --checkpoint-file <ckpt> \
+  --telemetry \
+  --telemetry-host 127.0.0.1 \
+  --telemetry-port 9870
 ```
 
 Dummy agents for debugging:
@@ -79,6 +86,19 @@ logs/rsl_rl/robocrane_jointspace/
 - Includes automatic PPO `num_mini_batches` scaling from rollout batch size unless `--disable-auto-mini-batches` is set
 - `--policy lstm` switches actor/critic to `rsl_rl` `RNNModel` (LSTM)
 - Default logger is W&B; switch with `--logger tensorboard` if needed
+- Curriculum is two-stage:
+  - Stage 1 (free-space): A->B motion tracking
+  - Stage 2 (contact): goals near a contact box with force-tracking reward at TCP
+- Scene now includes:
+  - A rigid TCP block attached to the gripper
+  - A static contact box in the world
+- Contact-force pipeline computes:
+  - nominal torque via inverse dynamics
+  - torque residual
+  - external wrench/force via damped inverse of `J^T`
+- Curriculum and contact reward tuning points are in:
+  - `mjlab_robocrane/mdp.py` (`GoalPoseCommandCfg`)
+  - `mjlab_robocrane/env_cfg.py` (reward weights/targets)
 
 W&B setup:
 
