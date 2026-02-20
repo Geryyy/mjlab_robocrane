@@ -1,0 +1,11 @@
+logs/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.out
+*.h5
+*.ckpt
+wandb/
