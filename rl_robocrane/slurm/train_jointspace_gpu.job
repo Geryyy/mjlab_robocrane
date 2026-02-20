@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --job-name=rl_robocrane_cart
+#SBATCH --output=slurm_outputs/train_cartesian_gpu_%j.out
+#SBATCH --error=slurm_outputs/train_cartesian_gpu_%j.err
+#SBATCH --partition=GPU-a100s
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --time=48:00:00
+#SBATCH --gres=gpu:a100s:1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=128G
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate rl_robocrane
+
+# Go to the correct folder
+cd ~/projects/rl_robocrane/trainer
+
+# Run training
+python train.py --env jointspace --algo PPO --n_envs 64

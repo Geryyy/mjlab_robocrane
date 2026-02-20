@@ -1,0 +1,279 @@
+<mujoco model="unnamed_model">
+  <compiler autolimits="true" angle="radian"/>
+  <option timestep="0.001" gravity="0 0 -9.8100000000000005" integrator="implicitfast"/>
+  <statistic meansize="0.029999999999999999" extent="0.29999999999999999" center="0.29999999999999999 0 0"/>
+  <default>
+    <default class="/"/>
+    <default class="lab/"/>
+    <default class="lab/iiwa/"/>
+    <default class="lab/iiwa/cardan_joint/">
+      <default class="lab/iiwa/cardan_joint/visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="lab/iiwa/cardan_joint/collision">
+        <geom type="mesh" group="3"/>
+      </default>
+    </default>
+    <default class="lab/iiwa/cardan_joint/ur_gripper/2f85">
+      <mesh scale="0.001 0.001 0.001"/>
+      <joint axis="1 0 0"/>
+      <general biastype="affine"/>
+      <default class="lab/iiwa/cardan_joint/ur_gripper/visual2">
+        <geom type="mesh" contype="0" conaffinity="0" group="2" material="lab/iiwa/cardan_joint/ur_gripper/gray2"/>
+      </default>
+      <default class="lab/iiwa/cardan_joint/ur_gripper/driver">
+        <joint solreflimit="0.0050000000000000001 1" solimplimit="0.94999999999999996 0.98999999999999999 0.001" range="0 0.80000000000000004" armature="0.0050000000000000001" damping="0.10000000000000001"/>
+      </default>
+      <default class="lab/iiwa/cardan_joint/ur_gripper/follower">
+        <joint pos="0 -0.017999999999999999 0.0064999999999999997" solreflimit="0.0050000000000000001 1" solimplimit="0.94999999999999996 0.98999999999999999 0.001" range="-0.872664 0.872664"/>
+      </default>
+      <default class="lab/iiwa/cardan_joint/ur_gripper/spring_link">
+        <joint stiffness="0.050000000000000003" range="-0.29670597283 0.80000000000000004" springref="2.6200000000000001" damping="0.00125"/>
+      </default>
+      <default class="lab/iiwa/cardan_joint/ur_gripper/coupler">
+        <joint solreflimit="0.0050000000000000001 1" solimplimit="0.94999999999999996 0.98999999999999999 0.001" range="-1.5700000000000001 0"/>
+      </default>
+      <default class="lab/iiwa/cardan_joint/ur_gripper/collision2">
+        <geom type="box" condim="3" group="3" rgba="1 0.42352899999999999 0.039215699999999999 1"/>
+        <default class="lab/iiwa/cardan_joint/ur_gripper/pad_box1">
+          <geom type="box" priority="1" size="0.010999999999999999 0.0040000000000000001 0.0093749999999999997" rgba="0.55000000000000004 0.55000000000000004 0.55000000000000004 1" friction="0.69999999999999996" mass="0" solref="0.0040000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" pos="0 -0.0025999999999999999 0.028125000000000001"/>
+        </default>
+        <default class="lab/iiwa/cardan_joint/ur_gripper/pad_box2">
+          <geom type="box" priority="1" size="0.010999999999999999 0.0040000000000000001 0.0093749999999999997" rgba="0.45000000000000001 0.45000000000000001 0.45000000000000001 1" friction="0.59999999999999998" mass="0" solref="0.0040000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" pos="0 -0.0025999999999999999 0.0093749999999999997"/>
+        </default>
+      </default>
+    </default>
+    <default class="wall/"/>
+    <default class="block_green/"/>
+    <default class="block_orange/"/>
+    <default class="block_blue/"/>
+  </default>
+  <asset>
+    <texture name="lab//unnamed_texture_0" type="skybox" builtin="gradient" rgb1="0.59999999999999998 0.80000000000000004 1" rgb2="0.20000000000000001 0.20000000000000001 0.20000000000000001" width="512" height="3072"/>
+    <texture name="lab/groundplane" type="2d" builtin="checker" rgb1="0.5 0.69999999999999996 0.90000000000000002" rgb2="0.29999999999999999 0.5 0.69999999999999996" mark="edge" markrgb="0.90000000000000002 0.90000000000000002 0.90000000000000002" width="300" height="300"/>
+    <material name="lab/groundplane" class="lab/" texture="lab/groundplane" texrepeat="5 5" texuniform="true" reflectance="0.40000000000000002"/>
+    <mesh name="lab/iiwa/link_0" class="lab/iiwa/" file="base_link-5923539fbd7857ea716ff1bc3ef3f05fb44fefdd.stl"/>
+    <mesh name="lab/iiwa/link_1" class="lab/iiwa/" file="link_1-ac6245160be1a43d652c2a2c3b73a58d1dfa90e4.stl"/>
+    <mesh name="lab/iiwa/link_2" class="lab/iiwa/" file="link_2-825b1e76e8e7c70ae4c8d112f62701a01555dcf5.stl"/>
+    <mesh name="lab/iiwa/link_3" class="lab/iiwa/" file="link_3-b55302ba767376e20501905d1e5ea3ae6b70998d.stl"/>
+    <mesh name="lab/iiwa/link_4" class="lab/iiwa/" file="link_4-05ccd5ecc00b0d36b59bc264f7cec382d4c4122b.stl"/>
+    <mesh name="lab/iiwa/link_5" class="lab/iiwa/" file="link_5-fcf25b48909184c134560cfa93731b85bf4698c9.stl"/>
+    <mesh name="lab/iiwa/link_6" class="lab/iiwa/" file="link_6-955785181a16fa937663f7db1c496e9605b820a9.stl"/>
+    <mesh name="lab/iiwa/link_7" class="lab/iiwa/" file="link_7-85a5c154edcbf21b01a9031cc0a7c9861a4e0fed.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/cj_cam_mount" class="lab/iiwa/cardan_joint/" file="cj_top_V4_coll-6f3e36287b54bdd5ad2518d59e4cc865785780c3.obj"/>
+    <mesh name="lab/iiwa/cardan_joint/cj_middle" class="lab/iiwa/cardan_joint/" file="cj_middle-1309231b4c0a493c2b65609bbb64275813619889.obj"/>
+    <mesh name="lab/iiwa/cardan_joint/cj_bot" class="lab/iiwa/cardan_joint/" file="cj_asm_half-947726d4ba6162bd80d70f31db90d4ae33ecd56c.obj"/>
+    <mesh name="lab/iiwa/cardan_joint/cj_cam_mount_vis" class="lab/iiwa/cardan_joint/" file="cj_top_V4-76978c996657efe89708b43b67fb00f5f31b4bc6.obj"/>
+    <mesh name="lab/iiwa/cardan_joint/cj_middle_vis" class="lab/iiwa/cardan_joint/" file="cj_middle_vis-e08f93e997c48b5995634064a579731fca49cfe9.obj"/>
+    <mesh name="lab/iiwa/cardan_joint/cj_bot_vis" class="lab/iiwa/cardan_joint/" file="cj_asm_half_vis-10e9d2e22a7610ed98d9ae3b58b68799d0da53a0.obj"/>
+    <material name="lab/iiwa/cardan_joint/ur_gripper/black2" class="lab/iiwa/cardan_joint/ur_gripper/2f85" rgba="0.14899999999999999 0.14899999999999999 0.14899999999999999 1"/>
+    <material name="lab/iiwa/cardan_joint/ur_gripper/wood2" class="lab/iiwa/cardan_joint/ur_gripper/2f85" rgba="0.56000000000000005 0.37 0.28999999999999998 1"/>
+    <material name="lab/iiwa/cardan_joint/ur_gripper/gray2" class="lab/iiwa/cardan_joint/ur_gripper/2f85" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/base_mount" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="base_mount-22e57178defe77afb6bdd333bfae16607f1eb3dd.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/base" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="base-e5dacbcc3971bfdb549ff8c7d38ea873ca7f2933.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/driver" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="driver-97efa43184c575b31ff1f3980641896f51492762.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/coupler" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="coupler-0a4240dc94992944cca6ec9e270ff1658fa86c55.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/follower" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="follower-39e4b8048f1395ee38cb45b37b5fec0e6f2aaec9.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/pad" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="pad-e6a633b2c81740b1f783ec4c6e695c8cc570f09d.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/silicone_pad" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="silicone_pad-c284384f3ca6dcdc24d6188a5d1a2d4c42c412ac.stl"/>
+    <mesh name="lab/iiwa/cardan_joint/ur_gripper/spring_link" class="lab/iiwa/cardan_joint/ur_gripper/2f85" file="spring_link-8f50234325193b84e9f86b7a63a24560a389c9bf.stl"/>
+    <material name="wall/wood" class="wall/" specular="0.10000000000000001" shininess="0.20000000000000001" reflectance="0.050000000000000003" rgba="0.55000000000000004 0.27000000000000002 0.070000000000000007 1"/>
+    <material name="wall/aluminum" class="wall/" specular="0.80000000000000004" shininess="0.90000000000000002" reflectance="0.59999999999999998" rgba="0.80000000000000004 0.80000000000000004 0.80000000000000004 1"/>
+  </asset>
+  <worldbody>
+    <body name="ground" mocap="false" pos="0 0 0">
+      <site name="ground_site_attach" class="/"/>
+      <body name="lab/">
+        <light name="lab//unnamed_light_0" class="lab/" directional="true" pos="0 0 1.5" dir="0 0 -1"/>
+        <geom name="lab/floor" class="lab/" type="plane" size="0 0 0.050000000000000003" material="lab/groundplane"/>
+        <site name="lab/ground_attach" class="lab/" group="0" rgba="1 0 0 1" size="0.01" pos="0 0 0"/>
+        <body pos="0 0 0" name="lab/iiwa/">
+          <body name="lab/iiwa/base" pos="0 0 0">
+            <camera name="lab/iiwa/robotview" class="lab/iiwa/" mode="fixed" pos="1 0 0.40000000000000002" quat="0.65300000000000002 0.27100000000000002 0.27100000000000002 0.65300000000000002"/>
+            <inertial pos="0 0 0" mass="0" diaginertia="0 0 0"/>
+            <geom name="lab/iiwa//unnamed_geom_0" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" mesh="lab/iiwa/link_0"/>
+            <geom name="lab/iiwa/col_sockel" class="lab/iiwa/" type="sphere" contype="0" conaffinity="0" group="3" size="0.12" rgba="1 0 0 1" density="0" pos="-0.01 0 0.10000000000000001"/>
+            <body name="lab/iiwa/iiwa_link_1" pos="0 0 0.1575">
+              <inertial pos="0 -0.01439 0.102503" quat="1 0 0 0" mass="6.4950000000000001" diaginertia="0.0690761441316632 0.071108558691451398 0.020062585440211899"/>
+              <joint name="lab/iiwa/joint_1" class="lab/iiwa/" pos="0 0 0" axis="0 0 1" limited="true" range="-2.9670597283903604 2.9670597283903604"/>
+              <geom name="lab/iiwa//unnamed_geom_2" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" pos="0 0 -0.0050000000000000001" mesh="lab/iiwa/link_1"/>
+              <geom name="lab/iiwa/col_joint1" class="lab/iiwa/" type="capsule" contype="1" conaffinity="1" group="3" size="0.074999999999999997" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" fromto="0 0 0 0 -0.050000000000000003 0.20250000000000001" quat="0 0 0 1"/>
+              <body name="lab/iiwa/iiwa_link_2" pos="0 0 0.20250000000000001" quat="0 0 0.70710700000000004 0.70710700000000004">
+                <inertial pos="1.2e-05 0.06472 0.0048040000000000001" quat="1 0 0 0" mass="8.8070000000000004" diaginertia="0.082470168353469195 0.016411096805519099 0.087351089266136106"/>
+                <joint name="lab/iiwa/joint_2" class="lab/iiwa/" pos="0 0 0" axis="0 0 1" limited="true" range="-2.0943951023931953 2.0943951023931953"/>
+                <geom name="lab/iiwa//unnamed_geom_4" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.42352899999999999 0.039215699999999999 1" density="0" pos="0 0 -0.012999999999999999" quat="0 0 0 1" mesh="lab/iiwa/link_2"/>
+                <geom name="lab/iiwa/col_joint2" class="lab/iiwa/" type="capsule" contype="1" conaffinity="1" group="3" size="0.074999999999999997" rgba="1 0.42352899999999999 0.039215699999999999 1" density="0" fromto="0 0 0.051299999999999998 0 0.23749999999999999 0" quat="0 0 0 1"/>
+                <body name="lab/iiwa/iiwa_link_3" pos="0 0.23749999999999999 0" quat="0 0 0.70710700000000004 0.70710700000000004">
+                  <inertial pos="-0.00020799999999999999 0.01601 0.087282999999999999" quat="1 0 0 0" mass="2.7999999999999998" diaginertia="0.023015294131881699 0.022866155414347399 0.0454482283748983"/>
+                  <joint name="lab/iiwa/joint_3" class="lab/iiwa/" pos="0 0 0" axis="0 0 1" limited="true" range="-2.9670597283903604 2.9670597283903604"/>
+                  <geom name="lab/iiwa//unnamed_geom_6" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" pos="0 0 -0.0050000000000000001" mesh="lab/iiwa/link_3"/>
+                  <geom name="lab/iiwa/col_joint3" class="lab/iiwa/" type="capsule" contype="1" conaffinity="1" group="3" size="0.070000000000000007" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" fromto="0 0 0 0 0.050000000000000003 0.1825" quat="0 0 0 1"/>
+                  <body name="lab/iiwa/iiwa_link_4" pos="0 0 0.1825" quat="0.70710700000000004 0.70710700000000004 0 0">
+                    <inertial pos="-0.000203 0.098639000000000004 0.011478" quat="1 0 0 0" mass="5.2830000000000004" diaginertia="0.047278966834196801 0.0096472680414690908 0.046652900776167898"/>
+                    <joint name="lab/iiwa/joint_4" class="lab/iiwa/" pos="0 0 0" axis="0 0 1" limited="true" range="-2.0943951023931953 2.0943951023931953"/>
+                    <geom name="lab/iiwa//unnamed_geom_8" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.42352899999999999 0.039215699999999999 1" density="0" pos="0 0 -0.010999999999999999" mesh="lab/iiwa/link_4"/>
+                    <geom name="lab/iiwa/col_joint4" class="lab/iiwa/" type="capsule" contype="1" conaffinity="1" group="3" size="0.070000000000000007" rgba="1 0.42352899999999999 0.039215699999999999 1" density="0" fromto="0 0 0.040000000000000001 0 0.2175 0" quat="0 0 0 1"/>
+                    <body name="lab/iiwa/iiwa_link_5" pos="0 0.2175 0" quat="0 0 0.70710700000000004 0.70710700000000004">
+                      <inertial pos="5.7000000000000003e-05 0.014468 0.062937999999999994" mass="1.889" diaginertia="0.0138359953358589 0.011685933775196901 0.00571863785412578"/>
+                      <joint name="lab/iiwa/joint_5" class="lab/iiwa/" pos="0 0 0" axis="0 0 1" limited="true" range="-2.9670597283903604 2.9670597283903604"/>
+                      <geom name="lab/iiwa//unnamed_geom_10" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" pos="0 0 -0.0050000000000000001" quat="0 0 0 1" mesh="lab/iiwa/link_5"/>
+                      <geom name="lab/iiwa/col_joint5" class="lab/iiwa/" type="capsule" contype="1" conaffinity="1" group="3" size="0.070000000000000007" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" fromto="0 0 0 0 0.029999999999999999 0.1825" quat="0 0 0 1"/>
+                      <body name="lab/iiwa/iiwa_link_6" pos="0 0 0.1825" quat="0.70710700000000004 0.70710700000000004 0 0">
+                        <inertial pos="0.00036299999999999999 0.016982000000000001 -0.019730999999999999" quat="1 0 0 0" mass="2.3199999999999998" diaginertia="0.0073275878721676497 0.0047763375578371101 0.0060679763855029604"/>
+                        <joint name="lab/iiwa/joint_6" class="lab/iiwa/" pos="0 0 0" axis="0 0 1" limited="true" range="-2.0943951023931953 2.0943951023931953"/>
+                        <geom name="lab/iiwa//unnamed_geom_12" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.42352899999999999 0.039215699999999999 1" density="0" pos="0 0 -0.060999999999999999" quat="0 0 0 1" mesh="lab/iiwa/link_6"/>
+                        <geom name="lab/iiwa/col_joint67" class="lab/iiwa/" type="capsule" contype="1" conaffinity="1" group="3" size="0.059999999999999998" rgba="1 0.42352899999999999 0.039215699999999999 1" density="0" fromto="0 0 0 0 0.081000000000000003 0" quat="0 0 0 1"/>
+                        <body name="lab/iiwa/iiwa_link_7" pos="0 0.081000000000000003 0" quat="0 0 0.70710700000000004 0.70710700000000004">
+                          <inertial pos="0.0019040000000000001 -9.2999999999999997e-05 0.018862" quat="1 0 0 0" mass="0.86299999999999999" diaginertia="0.00088400000000000002 0.00088800000000000001 0.0011050000000000001"/>
+                          <joint name="lab/iiwa/joint_7" class="lab/iiwa/" pos="0 0 0" axis="0 0 1" limited="true" range="-3.0543261909900767 3.0543261909900767"/>
+                          <geom name="lab/iiwa//unnamed_geom_14" class="lab/iiwa/" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.40000000000000002 0.40000000000000002 0.40000000000000002 1" density="0" mesh="lab/iiwa/link_7"/>
+                          <site name="lab/iiwa/gripper_attachment" class="lab/iiwa/" group="0" rgba="1 0 0 1" size="0.01" pos="0 0 0.070999999999999994"/>
+                          <body pos="0 0 0.070999999999999994" name="lab/iiwa/cardan_joint/">
+                            <body name="lab/iiwa/cardan_joint/cj_top" pos="0 0 0" quat="0.5 0.5 -0.5 -0.5">
+                              <inertial pos="0.0135 -0 0.022380000000000001" quat="1 0 0 0" mass="0.5" diaginertia="0.00012400000000000001 0.00037800000000000003 0.00042499999999999998"/>
+                              <geom name="lab/iiwa/cardan_joint//unnamed_geom_0" class="lab/iiwa/cardan_joint/visual" contype="0" conaffinity="0" group="2" quat="0.70709999999999995 0 0 0.70709999999999995" mesh="lab/iiwa/cardan_joint/cj_cam_mount_vis"/>
+                              <geom name="lab/iiwa/cardan_joint//unnamed_geom_1" class="lab/iiwa/cardan_joint/collision" contype="0" quat="0.70709999999999995 0 0 0.70709999999999995" mesh="lab/iiwa/cardan_joint/cj_cam_mount"/>
+                              <site name="lab/iiwa/cardan_joint/imu1_site" class="lab/iiwa/cardan_joint/" type="sphere" rgba="1 0 0 1" size="0.0040000000000000001" pos="-0.0138 0.02 0.01" quat="0.5 0.5 -0.5 0.5"/>
+                              <camera name="lab/iiwa/cardan_joint/eye_in_hand" class="lab/iiwa/cardan_joint/" mode="fixed" fovy="75" pos="-0.17000000000000001 0.040000000000000001 0" quat="0.62721139999999997 0.62721139999999997 0.32650560000000001 0.32650560000000001"/>
+                              <site name="lab/iiwa/cardan_joint/camera_site" class="lab/iiwa/cardan_joint/" type="sphere" rgba="1 0 0 1" size="0.0040000000000000001" pos="-0.17000000000000001 0.040000000000000001 0" quat="0.62721139999999997 0.62721139999999997 0.32650560000000001 0.32650560000000001"/>
+                              <body name="lab/iiwa/cardan_joint/cj_middle" pos="0 0.048000000000000001 0" quat="0.70709999999999995 -0.70709999999999995 0 0">
+                                <inertial pos="0 0 0" quat="1 0 0 0" mass="0.016" diaginertia="9.9999999999999995e-07 9.9999999999999995e-07 9.9999999999999995e-07"/>
+                                <joint name="lab/iiwa/cardan_joint/joint_cj1" class="lab/iiwa/cardan_joint/" pos="0 0 0" axis="-1 0 0" limited="true" range="-1.0 1.0" damping="0.0050000000000000003"/>
+                                <geom name="lab/iiwa/cardan_joint//unnamed_geom_2" class="lab/iiwa/cardan_joint/visual" contype="0" conaffinity="0" group="2" quat="0.70709999999999995 0.70709999999999995 0 0" mesh="lab/iiwa/cardan_joint/cj_middle_vis"/>
+                                <geom name="lab/iiwa/cardan_joint//unnamed_geom_3" class="lab/iiwa/cardan_joint/collision" contype="0" conaffinity="0" quat="0.70709999999999995 0.70709999999999995 0 0" mesh="lab/iiwa/cardan_joint/cj_middle"/>
+                                <body name="lab/iiwa/cardan_joint/cj_bot" pos="0 0 0.028000000000000001" quat="0.70709999999999995 0 0 -0.70709999999999995">
+                                  <inertial pos="0 0 0.050000000000000003" quat="1 0 0 0" mass="1" diaginertia="0.00080000000000000004 0.00080000000000000004 0.001"/>
+                                  <joint name="lab/iiwa/cardan_joint/joint_cj2" class="lab/iiwa/cardan_joint/" pos="0 0 -0.028000000000000001" axis="-1 0 0" limited="true" range="-1.0 1.0" damping="0.0050000000000000003"/>
+                                  <geom name="lab/iiwa/cardan_joint//unnamed_geom_4" class="lab/iiwa/cardan_joint/visual" contype="0" conaffinity="0" group="2" quat="0 1 0 0" mesh="lab/iiwa/cardan_joint/cj_bot_vis"/>
+                                  <geom name="lab/iiwa/cardan_joint//unnamed_geom_5" class="lab/iiwa/cardan_joint/collision" contype="0" conaffinity="0" quat="0 1 0 0" mesh="lab/iiwa/cardan_joint/cj_bot"/>
+                                  <site name="lab/iiwa/cardan_joint/imu2_site" class="lab/iiwa/cardan_joint/" type="sphere" rgba="0 1 0 1" size="0.002" pos="0.0138 0.0124 0" quat="0.70709999999999995 0 0 -0.70709999999999995"/>
+                                  <site name="lab/iiwa/cardan_joint/tool_attach" class="lab/iiwa/cardan_joint/" type="sphere" rgba="0 0 1 1" size="0.0040000000000000001" pos="0 0 0.01" quat="0.70699999999999996 0 0 0.70699999999999996"/>
+                                  <body pos="0 0 0.01" quat="0.70699999999999996 0 0 0.70699999999999996" name="lab/iiwa/cardan_joint/ur_gripper/">
+                                    <body name="lab/iiwa/cardan_joint/ur_gripper/base_mount" childclass="lab/iiwa/cardan_joint/ur_gripper/2f85" pos="0 0 0">
+                                      <inertial pos="0 0 0" quat="1 0 0 0" mass="0.0001" diaginertia="9.9999999999999995e-07 9.9999999999999995e-07 9.9999999999999995e-07"/>
+                                      <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_0" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/base_mount"/>
+                                      <geom name="lab/iiwa/cardan_joint/ur_gripper/col_mount" type="cylinder" contype="1" conaffinity="1" group="3" size="0.040000000000000001 0.022499999999999999" rgba="1 0.42352899999999999 0.039215699999999999 1" pos="0 0 0.016"/>
+                                      <body name="lab/iiwa/cardan_joint/ur_gripper/base" pos="0 0 0.0038">
+                                        <body name="lab/iiwa/cardan_joint/ur_gripper/gripping_point" pos="0 0 0.13">
+                                          <site name="lab/iiwa/cardan_joint/ur_gripper/gripping_point" pos="0 0 0"/>
+                                        </body>
+                                        <inertial pos="0 -2.7039400000000001e-05 0.035467499999999999" quat="1 -0.00152849 0 0" mass="0.77744100000000005" diaginertia="0.00026028500000000002 0.000225381 0.00015270799999999999"/>
+                                        <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_2" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/base"/>
+                                        <geom name="lab/iiwa/cardan_joint/ur_gripper/col_base" type="box" contype="1" conaffinity="1" group="3" size="0.012500000000000001 0.029999999999999999 0.050000000000000003" rgba="1 0.42352899999999999 0.039215699999999999 1" pos="0 0 0.037999999999999999"/>
+                                        <site name="lab/iiwa/cardan_joint/ur_gripper/pinch" type="sphere" group="8" material="lab/iiwa/cardan_joint/ur_gripper/wood2" size="0.0050000000000000001" pos="0 0 0.14499999999999999"/>
+                                        <body name="lab/iiwa/cardan_joint/ur_gripper/right_driver" pos="0 0.030601099999999999 0.054904000000000001">
+                                          <inertial pos="2.96931e-12 0.017754700000000002 0.00107314" quat="0.68130100000000005 0.73200299999999996 0 0" mass="0.0089956299999999993" diaginertia="1.72352e-06 1.6090599999999999e-06 3.22006e-07"/>
+                                          <joint name="lab/iiwa/cardan_joint/ur_gripper/right_driver_joint" class="lab/iiwa/cardan_joint/ur_gripper/driver"/>
+                                          <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_4" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/gray2" mesh="lab/iiwa/cardan_joint/ur_gripper/driver"/>
+                                          <body name="lab/iiwa/cardan_joint/ur_gripper/right_coupler" pos="0 0.0315 -0.0041000000000000003">
+                                            <inertial pos="0 0.0030120899999999998 0.023217499999999999" quat="0.70563600000000004 -0.045590400000000003 0.045590400000000003 0.70563600000000004" mass="0.0140974" diaginertia="4.1620600000000001e-06 3.5221600000000001e-06 8.8813100000000003e-07"/>
+                                            <joint name="lab/iiwa/cardan_joint/ur_gripper/right_coupler_joint" class="lab/iiwa/cardan_joint/ur_gripper/coupler"/>
+                                            <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_5" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/coupler"/>
+                                            <geom name="lab/iiwa/cardan_joint/ur_gripper/col_right_coupler" type="box" contype="1" conaffinity="1" group="3" size="0.0051392800000000004 0.012750900000000001 0.026890899999999999" rgba="1 0 0 1" pos="0 0.0030120899999999998 0.023217499999999999" quat="0.70563600000000004 -0.045590400000000003 0.045590400000000003 0.70563600000000004"/>
+                                          </body>
+                                        </body>
+                                        <body name="lab/iiwa/cardan_joint/ur_gripper/right_spring_link" pos="0 0.0132 0.060900000000000003">
+                                          <inertial pos="-8.6500500000000008e-09 0.018162399999999999 0.021265800000000001" quat="0.66340299999999996 -0.24473700000000001 0.24473700000000001 0.66340299999999996" mass="0.022164199999999998" diaginertia="8.9685299999999993e-06 6.7173299999999996e-06 2.6393100000000001e-06"/>
+                                          <joint name="lab/iiwa/cardan_joint/ur_gripper/right_spring_link_joint" class="lab/iiwa/cardan_joint/ur_gripper/spring_link"/>
+                                          <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_7" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/spring_link"/>
+                                          <body name="lab/iiwa/cardan_joint/ur_gripper/right_follower" pos="0 0.055 0.037499999999999999">
+                                            <inertial pos="0 -0.011046 0.012478599999999999" quat="1 0.16639999999999999 0 0" mass="0.012522200000000001" diaginertia="2.6741500000000001e-06 2.4559000000000001e-06 6.0203100000000003e-07"/>
+                                            <joint name="lab/iiwa/cardan_joint/ur_gripper/right_follower_joint" class="lab/iiwa/cardan_joint/ur_gripper/follower"/>
+                                            <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_8" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/follower"/>
+                                            <body name="lab/iiwa/cardan_joint/ur_gripper/right_pad" pos="0 -0.0189 0.013520000000000001">
+                                              <geom name="lab/iiwa/cardan_joint/ur_gripper/right_pad1" class="lab/iiwa/cardan_joint/ur_gripper/pad_box1" contype="1" conaffinity="1"/>
+                                              <geom name="lab/iiwa/cardan_joint/ur_gripper/right_pad2" class="lab/iiwa/cardan_joint/ur_gripper/pad_box2"/>
+                                              <inertial pos="0 -0.0025000000000000001 0.018499999999999999" quat="0.70710700000000004 0 0 0.70710700000000004" mass="0.0035000000000000001" diaginertia="4.7395799999999999e-07 3.6458299999999998e-07 1.23958e-07"/>
+                                              <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_11" class="lab/iiwa/cardan_joint/ur_gripper/visual2" mesh="lab/iiwa/cardan_joint/ur_gripper/pad"/>
+                                              <body name="lab/iiwa/cardan_joint/ur_gripper/right_silicone_pad">
+                                                <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_12" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/silicone_pad"/>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                        <body name="lab/iiwa/cardan_joint/ur_gripper/left_driver" pos="0 -0.030601099999999999 0.054904000000000001" quat="0 0 0 1">
+                                          <inertial pos="0 0.017754700000000002 0.00107314" quat="0.68130100000000005 0.73200299999999996 0 0" mass="0.0089956299999999993" diaginertia="1.72352e-06 1.6090599999999999e-06 3.22006e-07"/>
+                                          <joint name="lab/iiwa/cardan_joint/ur_gripper/left_driver_joint" class="lab/iiwa/cardan_joint/ur_gripper/driver"/>
+                                          <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_13" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/gray2" mesh="lab/iiwa/cardan_joint/ur_gripper/driver"/>
+                                          <body name="lab/iiwa/cardan_joint/ur_gripper/left_coupler" pos="0 0.0315 -0.0041000000000000003">
+                                            <inertial pos="0 0.0030120899999999998 0.023217499999999999" quat="0.70563600000000004 -0.045590400000000003 0.045590400000000003 0.70563600000000004" mass="0.0140974" diaginertia="4.1620600000000001e-06 3.5221600000000001e-06 8.8813100000000003e-07"/>
+                                            <joint name="lab/iiwa/cardan_joint/ur_gripper/left_coupler_joint" class="lab/iiwa/cardan_joint/ur_gripper/coupler"/>
+                                            <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_14" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/coupler"/>
+                                            <geom name="lab/iiwa/cardan_joint/ur_gripper/col_left_coupler" type="box" contype="1" conaffinity="1" group="3" size="0.0051392800000000004 0.012750900000000001 0.026890899999999999" rgba="1 0 0 1" pos="0 0.0030120899999999998 0.023217499999999999" quat="0.70563600000000004 -0.045590400000000003 0.045590400000000003 0.70563600000000004"/>
+                                          </body>
+                                        </body>
+                                        <body name="lab/iiwa/cardan_joint/ur_gripper/left_spring_link" pos="0 -0.0132 0.060900000000000003" quat="0 0 0 1">
+                                          <inertial pos="-8.6500500000000008e-09 0.018162399999999999 0.021265800000000001" quat="0.66340299999999996 -0.24473700000000001 0.24473700000000001 0.66340299999999996" mass="0.022164199999999998" diaginertia="8.9685299999999993e-06 6.7173299999999996e-06 2.6393100000000001e-06"/>
+                                          <joint name="lab/iiwa/cardan_joint/ur_gripper/left_spring_link_joint" class="lab/iiwa/cardan_joint/ur_gripper/spring_link"/>
+                                          <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_16" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/spring_link"/>
+                                          <body name="lab/iiwa/cardan_joint/ur_gripper/left_follower" pos="0 0.055 0.037499999999999999">
+                                            <inertial pos="0 -0.011046 0.012478599999999999" quat="1 0.16639999999999999 0 0" mass="0.012522200000000001" diaginertia="2.6741500000000001e-06 2.4559000000000001e-06 6.0203100000000003e-07"/>
+                                            <joint name="lab/iiwa/cardan_joint/ur_gripper/left_follower_joint" class="lab/iiwa/cardan_joint/ur_gripper/follower"/>
+                                            <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_17" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/follower"/>
+                                            <body name="lab/iiwa/cardan_joint/ur_gripper/left_pad" pos="0 -0.0189 0.013520000000000001">
+                                              <geom name="lab/iiwa/cardan_joint/ur_gripper/left_pad1" class="lab/iiwa/cardan_joint/ur_gripper/pad_box1" contype="1" conaffinity="1"/>
+                                              <geom name="lab/iiwa/cardan_joint/ur_gripper/left_pad2" class="lab/iiwa/cardan_joint/ur_gripper/pad_box2"/>
+                                              <inertial pos="0 -0.0025000000000000001 0.018499999999999999" quat="1 0 0 1" mass="0.0035000000000000001" diaginertia="4.7395799999999999e-07 3.6458299999999998e-07 1.23958e-07"/>
+                                              <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_20" class="lab/iiwa/cardan_joint/ur_gripper/visual2" mesh="lab/iiwa/cardan_joint/ur_gripper/pad"/>
+                                              <body name="lab/iiwa/cardan_joint/ur_gripper/left_silicone_pad">
+                                                <geom name="lab/iiwa/cardan_joint/ur_gripper//unnamed_geom_21" class="lab/iiwa/cardan_joint/ur_gripper/visual2" material="lab/iiwa/cardan_joint/ur_gripper/black2" mesh="lab/iiwa/cardan_joint/ur_gripper/silicone_pad"/>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+
+  </worldbody>
+  <contact>
+    <exclude name="lab/iiwa/cardan_joint/ur_gripper//unnamed_contact_0" body1="lab/iiwa/cardan_joint/ur_gripper/base" body2="lab/iiwa/cardan_joint/ur_gripper/left_driver"/>
+    <exclude name="lab/iiwa/cardan_joint/ur_gripper//unnamed_contact_1" body1="lab/iiwa/cardan_joint/ur_gripper/base" body2="lab/iiwa/cardan_joint/ur_gripper/right_driver"/>
+    <exclude name="lab/iiwa/cardan_joint/ur_gripper//unnamed_contact_2" body1="lab/iiwa/cardan_joint/ur_gripper/base" body2="lab/iiwa/cardan_joint/ur_gripper/left_spring_link"/>
+    <exclude name="lab/iiwa/cardan_joint/ur_gripper//unnamed_contact_3" body1="lab/iiwa/cardan_joint/ur_gripper/base" body2="lab/iiwa/cardan_joint/ur_gripper/right_spring_link"/>
+    <exclude name="lab/iiwa/cardan_joint/ur_gripper//unnamed_contact_4" body1="lab/iiwa/cardan_joint/ur_gripper/right_coupler" body2="lab/iiwa/cardan_joint/ur_gripper/right_follower"/>
+    <exclude name="lab/iiwa/cardan_joint/ur_gripper//unnamed_contact_5" body1="lab/iiwa/cardan_joint/ur_gripper/left_coupler" body2="lab/iiwa/cardan_joint/ur_gripper/left_follower"/>
+  </contact>
+  <equality>
+    <connect name="lab/iiwa/cardan_joint/ur_gripper//unnamed_equality_0" class="lab/iiwa/cardan_joint/ur_gripper/2f85" solref="0.0050000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" body1="lab/iiwa/cardan_joint/ur_gripper/right_follower" body2="lab/iiwa/cardan_joint/ur_gripper/right_coupler" anchor="0 0 0"/>
+    <connect name="lab/iiwa/cardan_joint/ur_gripper//unnamed_equality_1" class="lab/iiwa/cardan_joint/ur_gripper/2f85" solref="0.0050000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" body1="lab/iiwa/cardan_joint/ur_gripper/left_follower" body2="lab/iiwa/cardan_joint/ur_gripper/left_coupler" anchor="0 0 0"/>
+    <joint name="lab/iiwa/cardan_joint/ur_gripper//unnamed_equality_2" class="lab/iiwa/cardan_joint/ur_gripper/2f85" solref="0.0050000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" joint1="lab/iiwa/cardan_joint/ur_gripper/right_driver_joint" joint2="lab/iiwa/cardan_joint/ur_gripper/left_driver_joint" polycoef="0 1 0 0 0"/>
+  </equality>
+  <tendon>
+    <fixed name="lab/iiwa/cardan_joint/ur_gripper/split" class="lab/iiwa/cardan_joint/ur_gripper/2f85">
+      <joint joint="lab/iiwa/cardan_joint/ur_gripper/right_driver_joint" coef="0.5"/>
+      <joint joint="lab/iiwa/cardan_joint/ur_gripper/left_driver_joint" coef="0.5"/>
+    </fixed>
+  </tendon>
+  <actuator>
+    <motor name="lab/iiwa/torq_j1" class="lab/iiwa/" ctrllimited="true" ctrlrange="-176 176" joint="lab/iiwa/joint_1"/>
+    <motor name="lab/iiwa/torq_j2" class="lab/iiwa/" ctrllimited="true" ctrlrange="-176 176" joint="lab/iiwa/joint_2"/>
+    <motor name="lab/iiwa/torq_j3" class="lab/iiwa/" ctrllimited="true" ctrlrange="-110 110" joint="lab/iiwa/joint_3"/>
+    <motor name="lab/iiwa/torq_j4" class="lab/iiwa/" ctrllimited="true" ctrlrange="-110 110" joint="lab/iiwa/joint_4"/>
+    <motor name="lab/iiwa/torq_j5" class="lab/iiwa/" ctrllimited="true" ctrlrange="-110 110" joint="lab/iiwa/joint_5"/>
+    <motor name="lab/iiwa/torq_j6" class="lab/iiwa/" ctrllimited="true" ctrlrange="-40 40" joint="lab/iiwa/joint_6"/>
+    <motor name="lab/iiwa/torq_j7" class="lab/iiwa/" ctrllimited="true" ctrlrange="-40 40" joint="lab/iiwa/joint_7"/>
+    <general name="lab/iiwa/cardan_joint/ur_gripper/fingers_actuator" class="lab/iiwa/cardan_joint/ur_gripper/2f85" ctrlrange="0 255" forcerange="-5 5" tendon="lab/iiwa/cardan_joint/ur_gripper/split" gainprm="0.31372549999999999 0 0" biasprm="0 -100 -10"/>
+  </actuator>
+  <sensor>
+    <accelerometer name="lab/iiwa/cardan_joint/acc1" site="lab/iiwa/cardan_joint/imu1_site"/>
+    <gyro name="lab/iiwa/cardan_joint/gyro1" site="lab/iiwa/cardan_joint/imu1_site"/>
+    <accelerometer name="lab/iiwa/cardan_joint/acc2" site="lab/iiwa/cardan_joint/imu2_site"/>
+    <gyro name="lab/iiwa/cardan_joint/gyro2" site="lab/iiwa/cardan_joint/imu2_site"/>
+  </sensor>
+</mujoco>

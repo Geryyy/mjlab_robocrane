@@ -1,0 +1,83 @@
+syntax = "proto3";
+package robocrane;
+
+// -----------------------------------------------------------------------------
+// Telemetry message for Robocrane rollout streaming
+// -----------------------------------------------------------------------------
+message RobocraneTelemetry {
+  // ---------------------------------------------------------------------------
+  // Time
+  // ---------------------------------------------------------------------------
+  uint64 timestamp_ms = 1;
+
+  // ---------------------------------------------------------------------------
+  // Raw Joint States (denormalized)
+  // ---------------------------------------------------------------------------
+  repeated float q = 2;             // Joint positions (rad), 9 DoF
+  repeated float q_dot = 3;         // Joint velocities (rad/s), 9 DoF
+  repeated float q_ddot = 4;         // Joint accelerations (rad/s), 9 DoF
+
+  // ---------------------------------------------------------------------------
+  // Normalized Joint States (from observation)
+  // ---------------------------------------------------------------------------
+  repeated float q_norm = 21;       // Normalized joint pos ([-1,1])
+  repeated float qdot_norm = 22;    // Normalized joint vel
+  //
+  // ---------------------------------------------------------------------------
+  // Desired Joint States
+  // ---------------------------------------------------------------------------
+  repeated float q_d = 23;
+  repeated float qdot_d = 24;
+  repeated float qddot_d = 25;
+
+  // ---------------------------------------------------------------------------
+  // End-Effector Pose
+  // ---------------------------------------------------------------------------
+  repeated float pos_ef = 5;        // EE position [x,y,z]
+  float yaw_ef = 6;                 // EE yaw angle
+
+  // ---------------------------------------------------------------------------
+  // Goal Pose
+  // ---------------------------------------------------------------------------
+  repeated float goal_pos = 7;      // Desired EE pos
+  float goal_yaw = 8;               // Desired EE yaw
+
+  // ---------------------------------------------------------------------------
+  // Task-Space Error
+  // ---------------------------------------------------------------------------
+  repeated float e_pos = 9;         // pos_act - pos_goal
+  float e_yaw = 10;                  // yaw error
+
+  // ---------------------------------------------------------------------------
+  // Gripper / Object Pose (optional; depending on env settings)
+  // ---------------------------------------------------------------------------
+  repeated float pos = 11;          // Gripper pos if available
+  float yaw = 12;                   // Gripper yaw
+
+  // ---------------------------------------------------------------------------
+  // Previous action
+  // ---------------------------------------------------------------------------
+  repeated float a_prev = 13;       // Previous 7-DoF joint-acc command
+
+  // ---------------------------------------------------------------------------
+  // Terrain / Contact Information
+  // ---------------------------------------------------------------------------
+  repeated float surface_normal = 14; // Contact surface normal (3D)
+  repeated float z_axis = 15;         // Local EE z-axis (3D)
+
+  // ---------------------------------------------------------------------------
+  // External Forces / Wrench
+  // ---------------------------------------------------------------------------
+  repeated float force_ext = 16;      // External force vector
+  repeated float wrench_ext = 17;     // External torque
+  float force_norm = 18;              // Magnitude of external forces
+  float tau_res_norm = 19;            // Residual torque magnitude (optional)
+
+  // ---------------------------------------------------------------------------
+  // Action & Reward
+  // ---------------------------------------------------------------------------
+  repeated float action_raw = 20;      // Joint accel command sent to env
+  repeated float tau_raw = 32;      // Joint torques
+  float reward = 30;                   // Reward (scalar)
+  map<string, float> reward_terms = 31;// Named reward components
+}

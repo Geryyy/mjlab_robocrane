@@ -1,0 +1,72 @@
+{
+  "nodes": {
+    "acados-overlay": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1767880740,
+        "narHash": "sha256-mc1+fyUuRjzIAAMDv1zLv8Mn2jwgrnGOmxxQb27RjbQ=",
+        "path": "/home/toeleric/acados-nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/toeleric/acados-nix",
+        "type": "path"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1742709858,
+        "narHash": "sha256-Z3b9Exe17A8YqypZHs/Q29hp9InCz+uAyUksXMZR61s=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f9ec383a105dfa6ea11dc7527563aa6e929503bf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1762943920,
+        "narHash": "sha256-ITeH8GBpQTw9457ICZBddQEBjlXMmilML067q0e6vqY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "91c9a64ce2a84e648d0cf9671274bb9c2fb9ba60",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "acados-overlay": "acados-overlay",
+        "nixpkgs": "nixpkgs_2"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

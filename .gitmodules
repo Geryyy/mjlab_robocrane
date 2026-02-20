@@ -1,0 +1,6 @@
+[submodule "rsl_rl"]
+	path = rsl_rl
+	url = https://github.com/leggedrobotics/rsl_rl.git
+[submodule "mjlab"]
+	path = mjlab
+	url = https://github.com/mujocolab/mjlab.git

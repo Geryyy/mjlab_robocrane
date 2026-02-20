@@ -1,0 +1,22 @@
+name: rl_robocrane
+channels:
+  - conda-forge
+  - defaults
+  - pytorch
+
+dependencies:
+  - python=3.10
+  - numpy
+  - mujoco
+  - gymnasium=0.29.1
+  - pytorch-cuda
+  - cython
+  - tqdm
+  - pinocchio
+  - pip
+  - pip:
+      - stable-baselines3==2.7.0
+      - wandb
+      - protobuf
+      - tensorboard
+      - pygame

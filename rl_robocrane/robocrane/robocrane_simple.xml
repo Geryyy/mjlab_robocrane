@@ -1,0 +1,149 @@
+<mujoco model="robocrane_mjx_simplified">
+
+    <compiler autolimits="true" angle="radian" />
+
+    <option timestep="0.001" gravity="0 0 -9.81" integrator="implicitfast" cone="elliptic" jacobian="sparse" />
+
+    <statistic meansize="0.03" extent="0.3" center="0.3 0 0" />
+    <default>
+        <geom type="capsule"/>
+        <!-- <joint damping="0.1" /> -->
+
+        <default class="cardan">
+            <joint damping="0.01" limited="true" range="-1.5708 1.5708" />
+        </default>
+    </default>
+
+    <asset>
+        <texture name="groundplane" type="2d" builtin="checker" rgb1="0.5 0.7 0.9" rgb2="0.3 0.5 0.7" mark="edge" markrgb="0.9 0.9 0.9" width="300" height="300" />
+        <material name="groundplane" texture="groundplane" texrepeat="5 5" texuniform="true" reflectance="0.4" />
+        <material name="orange" rgba="1 0.4235 0.03922 1" />
+        <material name="gray" rgba="0.4 0.4 0.4 1" />
+        <material name="gripper" rgba="0.2 0.8 0.2 1" />
+    </asset>
+
+    <worldbody>
+        <body name="ground" mocap="false" pos="0 0 0">
+            <!-- Ground plane -->
+            <geom name="floor" type="plane" size="0 0 0.05" material="groundplane" />
+            <light directional="true" pos="0 0 1.5" dir="0 0 -1" />
+
+            <!-- IIWA Robot - matching simplified kinematics -->
+            <body pos="0 0 0" name="iiwa/">
+                <body name="iiwa/base" pos="0 0 0">
+                    <inertial pos="0 0 0" mass="0" diaginertia="0 0 0" />
+                    <geom name="base_geom" type="box" size="0.12 0.12 0.07875" pos="0 0 0.07875" material="gray" />
+
+
+                    <!-- Link 1 -->
+                    <body name="iiwa/iiwa_link_1" pos="0 0 0.1575">
+                        <inertial pos="0 -0.01439 0.1025" quat="1 0 0 0" mass="6.495" diaginertia="0.06908 0.07111 0.02006" />
+                        <joint name="iiwa/joint_1" pos="0 0 0" axis="0 0 1" limited="true" range="-2.967 2.967" />
+                        <geom name="link1_geom" type="capsule" fromto="0 0 0 0 -0.05 0.2025" size="0.075" material="gray" />
+
+                        <!-- Link 2 -->
+                        <body name="iiwa/iiwa_link_2" pos="0 0 0.2025" quat="0 0 0.7071 0.7071">
+                            <inertial pos="1.2e-05 0.06472 0.004804" quat="1 0 0 0" mass="8.807" diaginertia="0.08247 0.01641 0.08735" />
+                            <joint name="iiwa/joint_2" pos="0 0 0" axis="0 0 1" limited="true" range="-2.094 2.094" />
+                            <geom name="link2_geom" type="capsule" fromto="0 0 0.0513 0 0.2375 0" size="0.075" material="orange" />
+
+                            <!-- Link 3 -->
+                            <body name="iiwa/iiwa_link_3" pos="0 0.2375 0" quat="0 0 0.7071 0.7071">
+                                <inertial pos="-0.000208 0.01601 0.08728" quat="1 0 0 0" mass="2.8" diaginertia="0.02302 0.02287 0.04545" />
+                                <joint name="iiwa/joint_3" pos="0 0 0" axis="0 0 1" limited="true" range="-2.967 2.967" />
+                                <geom name="link3_geom" type="capsule" fromto="0 0 0 0 0.05 0.1825" size="0.07" material="gray" />
+
+                                <!-- Link 4 -->
+                                <body name="iiwa/iiwa_link_4" pos="0 0 0.1825" quat="0.7071 0.7071 0 0">
+                                    <inertial pos="-0.000203 0.09864 0.01148" quat="1 0 0 0" mass="5.283" diaginertia="0.04728 0.009647 0.04665" />
+                                    <joint name="iiwa/joint_4" pos="0 0 0" axis="0 0 1" limited="true" range="-2.094 2.094" />
+                                    <geom name="link4_geom" type="capsule" fromto="0 0 0.04 0 0.2175 0" size="0.07" material="orange" />
+
+                                    <!-- Link 5 -->
+                                    <body name="iiwa/iiwa_link_5" pos="0 0.2175 0" quat="0 0 0.7071 0.7071">
+                                        <inertial pos="5.7e-05 0.01447 0.06294" mass="1.889" diaginertia="0.01384 0.01169 0.005719" />
+                                        <joint name="iiwa/joint_5" pos="0 0 0" axis="0 0 1" limited="true" range="-2.967 2.967" />
+                                        <geom name="link5_geom" type="capsule" fromto="0 0 0 0 0.03 0.1825" size="0.07" material="gray" />
+
+                                        <!-- Link 6 -->
+                                        <body name="iiwa/iiwa_link_6" pos="0 0 0.1825" quat="0.7071 0.7071 0 0">
+                                            <inertial pos="0.000363 0.01698 -0.01973" quat="1 0 0 0" mass="2.32" diaginertia="0.007328 0.004776 0.006068" />
+                                            <joint name="iiwa/joint_6" pos="0 0 0" axis="0 0 1" limited="true" range="-2.094 2.094" />
+                                            <geom name="link6_geom" type="capsule" fromto="0 0 0 0 0.081 0" size="0.06" material="orange" />
+
+                                            <!-- Link 7 -->
+                                            <body name="iiwa/iiwa_link_7" pos="0 0.081 0" quat="0 0 0.7071 0.7071">
+                                                <inertial pos="0.001904 -9.3e-05 0.01886" quat="1 0 0 0" mass="0.863" diaginertia="0.000884 0.000888 0.001105" />
+                                                <joint name="iiwa/joint_7" pos="0 0 0" axis="0 0 1" limited="true" range="-3.054 3.054" />
+                                                <geom name="link7_geom" type="capsule" size="0.04 0.035" material="gray" />
+
+                                                <!-- Cardan Joint System -->
+                                                <body pos="0 0 0.071" name="iiwa/cardan_joint/">
+                                                    <!-- Cardan Top -->
+                                                    <body name="iiwa/cardan_joint/cj_top" pos="0 0 0" quat="0.5 0.5 -0.5 -0.5">
+                                                        <inertial pos="0.0135 -0 0.02238" quat="1 0 0 0" mass="0.5" diaginertia="0.000124 0.000378 0.000425" />
+                                                        <geom name="cardan_top_geom" type="box" size="0.03 0.02 0.04" material="gray" />
+
+                                                        <!-- Cardan Middle -->
+                                                        <body name="iiwa/cardan_joint/cj_middle" pos="0 0.048 0" quat="0.7071 -0.7071 0 0">
+                                                            <inertial pos="0 0 0" quat="1 0 0 0" mass="0.016" diaginertia="1e-06 1e-06 1e-06" />
+                                                            <!-- Passive Joint 1 -->
+                                                            <joint name="iiwa/cardan_joint/joint_cj1" pos="0 0 0" axis="-1 0 0" limited="true" range="-1 1" damping="0.005" />
+                                                            <geom name="cardan_middle_geom" type="sphere" size="0.02" material="gray" />
+
+                                                            <!-- Cardan Bottom -->
+                                                            <body name="iiwa/cardan_joint/cj_bot" pos="0 0 0.028" quat="0.7071 0 0 -0.7071">
+                                                                <inertial pos="0 0 0.05" quat="1 0 0 0" mass="1" diaginertia="0.0008 0.0008 0.001" />
+                                                                <!-- Passive Joint 2 -->
+                                                                <joint name="iiwa/cardan_joint/joint_cj2" pos="0 0 -0.028" axis="-1 0 0" limited="true" range="-1 1" damping="0.005" />
+                                                                <!-- <geom name="cardan_bottom_geom" type="cylinder" size="0.025 0.06" material="gray" /> -->
+
+                                                                <!-- Simplified Gripper -->
+                                                                <body pos="0 0 0.01" quat="0.707 0 0 0.707" name="iiwa/cardan_joint/ur_gripper/">
+                                                                    <body name="iiwa/cardan_joint/ur_gripper/base_mount" pos="0 0 0">
+                                                                        <inertial pos="0 0 0.02" mass="0.5" diaginertia="0.001 0.001 0.001" />
+                                                                        <geom name="gripper_base" type="box" size="0.04 0.03 0.01" material="gray" />
+
+                                                                        <!-- Gripper Fingers (Fixed for simplicity) -->
+                                                                        <geom name="gripper_finger1" type="box" size="0.01 0.02 0.03" pos="0.025 0 0.025" material="gray" />
+                                                                        <geom name="gripper_finger2" type="box" size="0.01 0.02 0.03" pos="-0.025 0 0.025" material="gray" />
+                                                                    </body>
+                                                                </body>
+                                                            </body>
+                                                        </body>
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+
+        <camera name="train_cam" mode="fixed"
+        pos="0. -1.5 2.5"
+        euler="0.7 -0 0"
+        fovy="45" />
+
+    </worldbody>
+
+    <actuator>
+        <motor name="torq_j1" ctrllimited="true" ctrlrange="-176 176" joint="iiwa/joint_1" />
+        <motor name="torq_j2" ctrllimited="true" ctrlrange="-176 176" joint="iiwa/joint_2" />
+        <motor name="torq_j3" ctrllimited="true" ctrlrange="-110 110" joint="iiwa/joint_3" />
+        <motor name="torq_j4" ctrllimited="true" ctrlrange="-110 110" joint="iiwa/joint_4" />
+        <motor name="torq_j5" ctrllimited="true" ctrlrange="-110 110" joint="iiwa/joint_5" />
+        <motor name="torq_j6" ctrllimited="true" ctrlrange="-40 40" joint="iiwa/joint_6" />
+        <motor name="torq_j7" ctrllimited="true" ctrlrange="-40 40" joint="iiwa/joint_7" />
+    </actuator>
+
+    <contact>
+        <exclude body1="iiwa/iiwa_link_5" body2="iiwa/iiwa_link_7"/>
+        <exclude body1="iiwa/base" body2="iiwa/iiwa_link_1"/>
+    </contact>
+
+</mujoco>
