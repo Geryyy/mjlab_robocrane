@@ -35,6 +35,5 @@ dependencies:
       - onnx
       - onnxscript>=0.5.4
       - wandb>=0.22.3
-      - -e ./rsl_rl
-      - -e ./mjlab
-
+      - rsl-rl-lib
+      - mjlab
