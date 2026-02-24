@@ -1,5 +1,7 @@
 logs/
 .vscode/
+.direnv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo

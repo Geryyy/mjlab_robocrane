@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --job-name=mjlab_robocrane_p2p
+#SBATCH --output=slurm_outputs/train_p2p_%j.out
+#SBATCH --error=slurm_outputs/train_p2p_%j.err
+#SBATCH --partition=GPU-a100s
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --time=48:00:00
+#SBATCH --gres=gpu:a100s:1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=128G
+
+micromamba activate mjlab_robocrane
+
+# Go to the correct folder
+cd ~/repos/mjlab_robocrane
+
+# Run training
+python mjlab_robocrane/train.py --n-envs 4096 --gpu-ids 0 --max-iterations 100000
