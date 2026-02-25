@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+ <tabbed_widget name="Main Window" parent="main_window">
+  <Tab containers="1" tab_name="Joints">
+   <Container>
+    <DockSplitter count="3" orientation="-" sizes="0.333002;0.333996;0.333002">
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-1.620788" left="0.000000" top="1.667803"/>
+       <limitY/>
+       <curve color="#1f77b4" name="q[0]"/>
+       <curve color="#d62728" name="q[1]"/>
+       <curve color="#1ac938" name="q[2]"/>
+       <curve color="#ff7f0e" name="q[3]"/>
+       <curve color="#f14cc1" name="q[4]"/>
+       <curve color="#9467bd" name="q[5]"/>
+       <curve color="#17becf" name="q[6]"/>
+       <curve color="#bcbd22" name="q[7]"/>
+       <curve color="#1f77b4" name="q[8]"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-1.783203" left="0.000000" top="2.485416"/>
+       <limitY/>
+       <curve color="#d62728" name="q_dot[0]"/>
+       <curve color="#1ac938" name="q_dot[1]"/>
+       <curve color="#ff7f0e" name="q_dot[2]"/>
+       <curve color="#f14cc1" name="q_dot[3]"/>
+       <curve color="#9467bd" name="q_dot[4]"/>
+       <curve color="#17becf" name="q_dot[5]"/>
+       <curve color="#bcbd22" name="q_dot[6]"/>
+       <curve color="#1f77b4" name="q_dot[7]"/>
+       <curve color="#d62728" name="q_dot[8]"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-10.070339" left="0.000000" top="8.901007"/>
+       <limitY/>
+       <curve color="#1ac938" name="q_ddot[0]"/>
+       <curve color="#ff7f0e" name="q_ddot[1]"/>
+       <curve color="#f14cc1" name="q_ddot[2]"/>
+       <curve color="#9467bd" name="q_ddot[3]"/>
+       <curve color="#17becf" name="q_ddot[4]"/>
+       <curve color="#bcbd22" name="q_ddot[5]"/>
+       <curve color="#1f77b4" name="q_ddot[6]"/>
+       <curve color="#d62728" name="q_ddot[7]"/>
+       <curve color="#1ac938" name="q_ddot[8]"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="Cartesian">
+   <Container>
+    <DockSplitter count="2" orientation="-" sizes="0.500497;0.499503">
+     <DockSplitter count="2" orientation="|" sizes="0.5;0.5">
+      <DockArea name="...">
+       <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+        <range right="4.942388" bottom="-0.108287" left="0.000000" top="0.486446"/>
+        <limitY/>
+        <curve color="#9467bd" name="e_pos[0]"/>
+        <curve color="#17becf" name="e_pos[1]"/>
+        <curve color="#bcbd22" name="e_pos[2]"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+        <range right="4.942388" bottom="0.707693" left="0.000000" top="1.290446"/>
+        <limitY/>
+        <curve color="#1f77b4" name="e_yaw"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter count="2" orientation="|" sizes="0.5;0.5">
+      <DockArea name="...">
+       <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+        <range right="4.942388" bottom="-0.055035" left="0.000000" top="0.659556"/>
+        <limitY/>
+        <curve color="#1ac938" name="pos_ef[0]"/>
+        <curve color="#ff7f0e" name="pos_ef[1]"/>
+        <curve color="#f14cc1" name="pos_ef[2]"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+        <range right="4.942388" bottom="-2.127151" left="0.000000" top="-1.544397"/>
+        <limitY/>
+        <curve color="#d62728" name="yaw_ef"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="Forces">
+   <Container>
+    <DockSplitter count="2" orientation="-" sizes="0.500497;0.499503">
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-15.035183" left="0.000000" top="5.465336"/>
+       <limitY/>
+       <curve color="#ff7f0e" name="force_ext[0]"/>
+       <curve color="#f14cc1" name="force_ext[1]"/>
+       <curve color="#9467bd" name="force_ext[2]"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-0.098409" left="0.000000" top="1.361416"/>
+       <limitY/>
+       <curve color="#17becf" name="wrench_ext[0]"/>
+       <curve color="#bcbd22" name="wrench_ext[1]"/>
+       <curve color="#1f77b4" name="wrench_ext[2]"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="Reward">
+   <Container>
+    <DockSplitter count="3" orientation="-" sizes="0.333002;0.333996;0.333002">
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-0.016578" left="0.000000" top="0.010864"/>
+       <limitY/>
+       <curve color="#d62728" name="reward"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-0.293811" left="0.000000" top="-0.032906"/>
+       <limitY/>
+       <curve color="#1ac938" name="reward_terms/passive_joint_vel"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" line_width="1.0" mode="TimeSeries" flip_y="false">
+       <range right="4.942388" bottom="-0.000148" left="0.000000" top="0.006081"/>
+       <limitY/>
+       <curve color="#ff7f0e" name="reward_terms/yaw_tracking"/>
+       <curve color="#f14cc1" name="reward_terms/position_tracking"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <currentTabIndex index="1"/>
+ </tabbed_widget>
+ <use_relative_time_offset enabled="1"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+ <Plugins>
+  <plugin ID="DataLoad CSV">
+   <parameters time_axis="" delimiter="0"/>
+  </plugin>
+  <plugin ID="DataLoad MCAP"/>
+  <plugin ID="DataLoad Parquet">
+   <default radioIndexChecked="0" parseDateTime="0" prevTimestamp="" dateFromat="yyyy-MM-dd hh:mm:ss"/>
+  </plugin>
+  <plugin ID="DataLoad ULog"/>
+  <plugin ID="MQTT Subscriber (Mosquitto)"/>
+  <plugin ID="UDP Server"/>
+  <plugin ID="WebSocket Server"/>
+  <plugin ID="Fast Fourier Transform"/>
+  <plugin ID="Quaternion to RPY"/>
+  <plugin ID="Reactive Script Editor">
+   <library code="--[[ Helper function to create a series from arrays&#xa;&#xa; new_series: a series previously created with ScatterXY.new(name)&#xa; prefix:     prefix of the timeseries, before the index of the array&#xa; suffix_X:   suffix to complete the name of the series containing the X value. If [nil], use the index of the array.&#xa; suffix_Y:   suffix to complete the name of the series containing the Y value&#xa; timestamp:   usually the tracker_time variable&#xa;              &#xa; Example:&#xa; &#xa; Assuming we have multiple series in the form:&#xa; &#xa;   /trajectory/node.{X}/position/x&#xa;   /trajectory/node.{X}/position/y&#xa;   &#xa; where {N} is the index of the array (integer). We can create a reactive series from the array with:&#xa; &#xa;   new_series = ScatterXY.new(&quot;my_trajectory&quot;) &#xa;   CreateSeriesFromArray( new_series, &quot;/trajectory/node&quot;, &quot;position/x&quot;, &quot;position/y&quot;, tracker_time );&#xa;--]]&#xa;&#xa;function CreateSeriesFromArray( new_series, prefix, suffix_X, suffix_Y, timestamp )&#xa;  &#xa;  --- clear previous values&#xa;  new_series:clear()&#xa;  &#xa;  --- Append points to new_series&#xa;  index = 0&#xa;  while(true) do&#xa;&#xa;    x = index;&#xa;    -- if not nil, get the X coordinate from a series&#xa;    if suffix_X ~= nil then &#xa;      series_x = TimeseriesView.find( string.format( &quot;%s.%d/%s&quot;, prefix, index, suffix_X) )&#xa;      if series_x == nil then break end&#xa;      x = series_x:atTime(timestamp)&#x9; &#xa;    end&#xa;    &#xa;    series_y = TimeseriesView.find( string.format( &quot;%s.%d/%s&quot;, prefix, index, suffix_Y) )&#xa;    if series_y == nil then break end &#xa;    y = series_y:atTime(timestamp)&#xa;    &#xa;    new_series:push_back(x,y)&#xa;    index = index+1&#xa;  end&#xa;end&#xa;&#xa;--[[ Similar to the built-in function GetSeriesNames(), but select only the names with a give prefix. --]]&#xa;&#xa;function GetSeriesNamesByPrefix(prefix)&#xa;  -- GetSeriesNames(9 is a built-in function&#xa;  all_names = GetSeriesNames()&#xa;  filtered_names = {}&#xa;  for i, name in ipairs(all_names)  do&#xa;    -- check the prefix&#xa;    if name:find(prefix, 1, #prefix) then&#xa;      table.insert(filtered_names, name);&#xa;    end&#xa;  end&#xa;  return filtered_names&#xa;end&#xa;&#xa;--[[ Modify an existing series, applying offsets to all their X and Y values&#xa;&#xa; series: an existing timeseries, obtained with TimeseriesView.find(name)&#xa; delta_x: offset to apply to each x value&#xa; delta_y: offset to apply to each y value &#xa;  &#xa;--]]&#xa;&#xa;function ApplyOffsetInPlace(series, delta_x, delta_y)&#xa;  -- use C++ indices, not Lua indices&#xa;  for index=0, series:size()-1 do&#xa;    x,y = series:at(index)&#xa;    series:set(index, x + delta_x, y + delta_y)&#xa;  end&#xa;end&#xa;"/>
+   <scripts/>
+  </plugin>
+  <plugin ID="CSV Exporter"/>
+ </Plugins>
+ <!-- - - - - - - - - - - - - - - -->
+ <previouslyLoaded_Datafiles/>
+ <previouslyLoaded_Streamer name="UDP Server"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <customMathEquations/>
+ <snippets/>
+ <!-- - - - - - - - - - - - - - - -->
+</root>
+

@@ -26,9 +26,6 @@ class JointAccelerationCtcActionCfg(ActionTermCfg):
     torque_limits: tuple[float, ...]
     kp: tuple[float, ...]
     kd: tuple[float, ...]
-    inertia_diag: tuple[
-        float, ...
-    ]  # DEPRECATED: No longer used, kept for backward compatibility
     action_lpf_alpha: float = 0.85
     ee_site_name: str = "gripping_point"
     wrench_damping: float = 1.0e-4
@@ -71,7 +68,6 @@ class JointAccelerationCtcAction(ActionTerm):
         self._tau_lim = _vec(cfg.torque_limits, "torque_limits")
         self._kp = _vec(cfg.kp, "kp")
         self._kd = _vec(cfg.kd, "kd")
-        self._mhat = _vec(cfg.inertia_diag, "inertia_diag")
         if not 0.0 <= cfg.action_lpf_alpha < 1.0:
             raise ValueError("action_lpf_alpha must be in [0, 1).")
         self._action_lpf_alpha = float(cfg.action_lpf_alpha)

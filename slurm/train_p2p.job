@@ -10,10 +10,12 @@
 #SBATCH --cpus-per-task=64
 #SBATCH --mem=128G
 
+eval "$(micromamba shell hook --shell bash)"
+
 micromamba activate mjlab_robocrane
 
 # Go to the correct folder
 cd ~/repos/mjlab_robocrane
 
 # Run training
-python mjlab_robocrane/train.py --n-envs 4096 --gpu-ids 0 --max-iterations 100000
+python mjlab_robocrane/train.py --n-envs 4096 --gpu-ids all --max-iterations 100000
