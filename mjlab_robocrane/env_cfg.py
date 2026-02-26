@@ -89,7 +89,7 @@ def robocrane_jointspace_env_cfg(
 
     rewards = {
         "stay_alive": RewardTermCfg(
-            func=mdp.stay_alive,
+            func=envs_mdp.is_alive,
             weight=1.0,
             params={},
         ),
@@ -131,7 +131,7 @@ def robocrane_jointspace_env_cfg(
                 "asset_cfg": SceneEntityCfg("robot", joint_names=("joint_[1-7]")),
             },
         ),
-        "action": RewardTermCfg(func=envs_mdp.action_l2, weight=-0.5),
+        "action": RewardTermCfg(func=envs_mdp.joint_acc_l2, weight=-0.5),
         "action_rate": RewardTermCfg(func=envs_mdp.action_rate_l2, weight=-0.03),
         # "action_acc": RewardTermCfg(func=envs_mdp.action_acc_l2, weight=-0.02),
         "redundancy_joint_shape": RewardTermCfg(

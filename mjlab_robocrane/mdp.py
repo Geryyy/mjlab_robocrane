@@ -167,10 +167,6 @@ def ee_pose(env: "ManagerBasedRlEnv", command_name: str) -> torch.Tensor:
     return torch.cat([cmd.ee_pos_w, cmd.ee_yaw], dim=-1)
 
 
-def stay_alive(env: "ManagerBasedRlEnv") -> torch.Tensor:
-    return torch.ones(1)
-
-
 def pose_tracking_exp(env: "ManagerBasedRlEnv", command_name: str) -> torch.Tensor:
     pos_error = goal_position_error(env, command_name)
     pos_error_norm = torch.linalg.norm(pos_error, dim=-1)
@@ -196,12 +192,11 @@ def success_bonus(
     robot: Entity = env.scene[asset_cfg.name]
     pos_error = torch.linalg.vector_norm(goal_position_error(env, command_name), dim=-1)
     # yaw_error = torch.abs(goal_yaw_error(env, command_name).squeeze(-1))
-    dq = robot.data.joint_vel[7:9, asset_cfg.joint_ids]
+    dq = robot.data.joint_vel[:, asset_cfg.joint_ids]
     sway_err = torch.linalg.vector_norm(dq, dim=-1)
-    if pos_error < pos_threshold:
-        r_success = torch.exp(-sway_err)
-    else:
-        r_success = torch.zeros(1)
+    r_success = torch.where(
+        pos_error < pos_threshold, torch.exp(-sway_err), torch.zeros_like(pos_error)
+    )
     return r_success
 
 
