@@ -90,7 +90,7 @@ def robocrane_jointspace_env_cfg(
     rewards = {
         "stay_alive": RewardTermCfg(
             func=envs_mdp.is_alive,
-            weight=1.0,
+            weight=10.0,
             params={},
         ),
         "pose_tracking": RewardTermCfg(
@@ -261,7 +261,7 @@ def robocrane_jointspace_env_cfg(
             ),
         ),
         decimation=30,
-        episode_length_s=20.0,
+        episode_length_s=5.0,
     )
 
     if play:
