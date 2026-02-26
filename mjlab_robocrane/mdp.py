@@ -18,6 +18,17 @@ if TYPE_CHECKING:
     from mjlab.envs import ManagerBasedRlEnv
 
 _DEFAULT_ASSET_CFG = SceneEntityCfg("robot")
+qdot_limits = torch.Tensor(
+    [
+        1.48353,
+        1.48353,
+        1.74533,
+        1.30900,
+        2.26893,
+        2.35619,
+        2.35619,
+    ]
+)
 
 
 class GoalPoseCommand(CommandTerm):
@@ -214,7 +225,26 @@ def passive_joint_velocity_l2(
     env: "ManagerBasedRlEnv", asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
 ) -> torch.Tensor:
     robot: Entity = env.scene[asset_cfg.name]
-    return torch.sum(torch.square(robot.data.joint_vel[:, asset_cfg.joint_ids]), dim=-1)
+    dq = robot.data.joint_vel[:, asset_cfg.joint_ids]
+    dq /= 50
+    return torch.sum(torch.square(dq), dim=-1)
+
+
+def joint_vel_l2(
+    env: ManagerBasedRlEnv, asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
+) -> torch.Tensor:
+    """Penalize joint velocities on the articulation using L2 squared kernel."""
+    robot: Entity = env.scene[asset_cfg.name]
+    dq = robot.data.joint_vel[:, asset_cfg.joint_ids]
+    dq = torch.clip(
+        dq, -qdot_limits[asset_cfg.joint_ids], qdot_limits[asset_cfg.joint_ids]
+    )
+    return torch.sum(torch.square(robot.data.joint_vel[:, asset_cfg.joint_ids]), dim=1)
+
+
+def action_l2(env: ManagerBasedRlEnv) -> torch.Tensor:
+    """Penalize the actions using L2 squared kernel."""
+    return torch.sum(torch.square(env.action_manager.action), dim=1)
 
 
 def passive_joint_pos_shaping_exp(
