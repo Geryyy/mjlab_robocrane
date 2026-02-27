@@ -14,7 +14,7 @@ def robocrane_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
             activation="tanh",
             obs_normalization=True,
             stochastic=True,
-            init_noise_std=0.5,
+            init_noise_std=0.1,
         ),
         critic=RslRlModelCfg(
             hidden_dims=(512, 256, 128),
