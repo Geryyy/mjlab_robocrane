@@ -255,17 +255,17 @@ def robocrane_jointspace_env_cfg(
             azimuth=120.0,
         ),
         sim=SimulationCfg(
-            nconmax=256,
-            njmax=2048,
+            # nconmax=256,
+            # njmax=2048,
             mujoco=MujocoCfg(
-                timestep=0.001,
-                iterations=20,
-                ls_iterations=20,
-                impratio=10,
-                cone="elliptic",
+                timestep=0.002,
+                # iterations=20,
+                # ls_iterations=20,
+                # impratio=10,
+                # cone="elliptic",
             ),
         ),
-        decimation=30,
+        decimation=15,
         episode_length_s=5.0,
     )
 
