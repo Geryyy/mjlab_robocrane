@@ -32,12 +32,10 @@ def robocrane_jointspace_env_cfg(
         "goal_pos_error": ObservationTermCfg(
             func=mdp.goal_position_error,
             params={"command_name": "goal_pose"},
-            noise=Unoise(n_min=-0.002, n_max=0.002),
         ),
         "goal_yaw_error": ObservationTermCfg(
             func=mdp.goal_yaw_error,
             params={"command_name": "goal_pose"},
-            noise=Unoise(n_min=-0.01, n_max=0.01),
         ),
         "ee_pose": ObservationTermCfg(
             func=mdp.ee_pose,
@@ -50,11 +48,11 @@ def robocrane_jointspace_env_cfg(
         ),
         "joint_pos": ObservationTermCfg(
             func=envs_mdp.joint_pos_rel,
-            noise=Unoise(n_min=-0.005, n_max=0.005),
+            # noise=Unoise(n_min=-0.00005, n_max=0.00005),
         ),
         "joint_vel": ObservationTermCfg(
             func=envs_mdp.joint_vel_rel,
-            noise=Unoise(n_min=-0.02, n_max=0.02),
+            # noise=Unoise(n_min=-0.02, n_max=0.02),
         ),
         "actions": ObservationTermCfg(func=envs_mdp.last_action),
     }
@@ -66,7 +64,7 @@ def robocrane_jointspace_env_cfg(
             resampling_time_range=(8.0, 12.0),
             entity_name="robot",
             ee_site_name="gripping_point",
-            curriculum_switch_steps=200_000,
+            curriculum_switch_steps=200_000_000_000,
         )
     }
 
@@ -78,8 +76,8 @@ def robocrane_jointspace_env_cfg(
             func=envs_mdp.reset_joints_by_offset,
             mode="reset",
             params={
-                "position_range": (-0.03, 0.03),
-                "velocity_range": (-0.01, 0.01),
+                "position_range": (-0.0, 0.0),
+                "velocity_range": (-0.0, 0.0),
                 "asset_cfg": SceneEntityCfg(
                     "robot", joint_names=("joint_[1-7]", "joint_cj1", "joint_cj2")
                 ),
