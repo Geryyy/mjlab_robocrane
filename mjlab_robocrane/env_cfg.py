@@ -40,7 +40,7 @@ def robocrane_jointspace_env_cfg(
         "ee_pose": ObservationTermCfg(
             func=mdp.ee_pose,
             params={"command_name": "goal_pose"},
-            noise=Unoise(n_min=-0.001, n_max=0.001),
+            # noise=Unoise(n_min=-0.001, n_max=0.001),
         ),
         "goal_pose": ObservationTermCfg(
             func=mdp.goal_pose,
