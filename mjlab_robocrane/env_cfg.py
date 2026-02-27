@@ -143,7 +143,7 @@ def robocrane_jointspace_env_cfg(
         ),
         "passive_joint_pos_shape": RewardTermCfg(
             func=mdp.passive_joint_pos_shaping_exp,
-            weight=0.03,
+            weight=0.01,
             params={
                 "asset_cfg": SceneEntityCfg(
                     "robot", joint_names=("joint_cj1", "joint_cj2")

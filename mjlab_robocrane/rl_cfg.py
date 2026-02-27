@@ -10,14 +10,14 @@ from mjlab.rl import (
 def robocrane_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
     return RslRlOnPolicyRunnerCfg(
         actor=RslRlModelCfg(
-            hidden_dims=(256, 128),
+            hidden_dims=(512, 256, 128),
             activation="tanh",
             obs_normalization=True,
             stochastic=True,
-            init_noise_std=0.4,
+            init_noise_std=0.5,
         ),
         critic=RslRlModelCfg(
-            hidden_dims=(256, 128),
+            hidden_dims=(512, 256, 128),
             activation="tanh",
             obs_normalization=True,
             stochastic=False,
@@ -30,7 +30,7 @@ def robocrane_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
             num_learning_epochs=8,
             num_mini_batches=8,
             learning_rate=3.0e-4,
-            schedule="fixed",
+            schedule="adaptive",
             gamma=0.99,
             lam=0.95,
             desired_kl=0.01,

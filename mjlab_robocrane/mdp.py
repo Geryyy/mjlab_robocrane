@@ -226,7 +226,7 @@ def passive_joint_velocity_l2(
 ) -> torch.Tensor:
     robot: Entity = env.scene[asset_cfg.name]
     dq = robot.data.joint_vel[:, asset_cfg.joint_ids]
-    dq /= 50
+    dq /= 50 * 3.14 / 180
     return torch.sum(torch.square(dq), dim=-1)
 
 
