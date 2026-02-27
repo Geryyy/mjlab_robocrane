@@ -134,17 +134,16 @@ def robocrane_jointspace_env_cfg(
         # "action_acc": RewardTermCfg(func=envs_mdp.action_acc_l2, weight=-0.02),
         "redundancy_joint_shape": RewardTermCfg(
             func=mdp.redundancy_joint_shaping_exp,
-            weight=0.3,
+            weight=0.03,
             params={
                 "asset_cfg": SceneEntityCfg(
                     "robot", joint_names=("joint_3", "joint_5")
                 ),
-                "std": 0.45,
             },
         ),
         "passive_joint_pos_shape": RewardTermCfg(
             func=mdp.passive_joint_pos_shaping_exp,
-            weight=0.35,
+            weight=0.03,
             params={
                 "asset_cfg": SceneEntityCfg(
                     "robot", joint_names=("joint_cj1", "joint_cj2")

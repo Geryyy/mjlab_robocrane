@@ -272,11 +272,10 @@ def passive_joint_pos_shaping_exp(
 def redundancy_joint_shaping_exp(
     env: "ManagerBasedRlEnv",
     asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
-    std: float = 0.45,
 ) -> torch.Tensor:
     robot: Entity = env.scene[asset_cfg.name]
     q = robot.data.joint_pos[:, asset_cfg.joint_ids]
-    return torch.exp(-torch.sum(torch.square(q), dim=-1) / (std * std))
+    return torch.exp(-torch.sum(torch.square(q), dim=-1))
 
 
 def illegal_contact(env: "ManagerBasedRlEnv", sensor_name: str) -> torch.Tensor:
