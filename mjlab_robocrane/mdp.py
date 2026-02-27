@@ -230,6 +230,15 @@ def passive_joint_velocity_l2(
     return torch.sum(torch.square(dq), dim=-1)
 
 
+def joint_limit_violation(
+    env: "ManagerBasedRlEnv", asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
+) -> torch.Tensor:
+    robot: Entity = env.scene[asset_cfg.name]
+    q = robot.data.joint_pos[:, asset_cfg.joint_ids]
+    q_limit = robot.data.joint_pos_limits[:, asset_cfg.joint_ids]
+    return torch.any(q >= q_limit[:, :, 1]) or torch.any(q <= q_limit[:, :, 0])
+
+
 def joint_vel_l2(
     env: ManagerBasedRlEnv, asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
 ) -> torch.Tensor:

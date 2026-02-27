@@ -58,7 +58,7 @@
             source .venv/bin/activate
             export PYTHONPATH="$PYTHONPATH:$VIRTUAL_ENV/lib/python3.12/site-packages"
             export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$LIBNVIDIA_PATH"
-            export CODESTRAL_API_KEY=$(secret-tool lookup api/codestral password)
+            export CODESTRAL_API_KEY=$(cat /run/secrets/api/codestral)
             unset QT_PLUGIN_PATH
         '';
         name = "RL-Robocrane";
