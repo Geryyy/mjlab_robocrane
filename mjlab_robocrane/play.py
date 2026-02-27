@@ -128,7 +128,6 @@ class TelemetryStreamer:
 
         msg.reward = float(reward[0].item())
         for name, value in base_env.reward_manager.get_active_iterable_terms(0):
-            print(f"{name}: {value}")
             msg.reward_terms[name] = float(value[0])
 
         self._sock.sendto(msg.SerializeToString(), self._addr)

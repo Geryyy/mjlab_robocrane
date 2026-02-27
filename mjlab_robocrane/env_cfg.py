@@ -174,14 +174,14 @@ def robocrane_jointspace_env_cfg(
     terminations = {
         "time_out": TerminationTermCfg(func=envs_mdp.time_out, time_out=True),
         "nan_detection": TerminationTermCfg(func=envs_mdp.nan_detection),
-        # "joint_limits": TerminationTermCfg(
-        #     func=mdp.joint_limit_violation,
-        #     params={
-        #         "asset_cfg": SceneEntityCfg(
-        #             "robot", joint_names=("joint_[1-7]", "joint_cj1", "joint_cj2")
-        #         ),
-        #     },
-        # ),
+        "joint_limits": TerminationTermCfg(
+            func=mdp.joint_limit_violation,
+            params={
+                "asset_cfg": SceneEntityCfg(
+                    "robot", joint_names=("joint_[1-7]", "joint_cj1", "joint_cj2")
+                ),
+            },
+        ),
     }
 
     metrics = {
